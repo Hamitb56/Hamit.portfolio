@@ -23,7 +23,6 @@ for (let i = 1; i <= frameCount; i++) {
     images.push(img);
 }
 
-// --- YUMUŞAK GEÇİŞ (LERP) DEĞİŞKENLERİ ---
 let targetFrame = 1; 
 let currentFrameIdx = 1;
 let isAnimating = false;
@@ -35,22 +34,18 @@ function resizeCanvas() {
     canvas.height = window.innerHeight * dpr;
     canvas.style.width = window.innerWidth + 'px';
     canvas.style.height = window.innerHeight + 'px';
-    
     context.imageSmoothingEnabled = true;
     context.imageSmoothingQuality = 'high';
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
-    
     renderCanvas(Math.round(currentFrameIdx));
 }
 
 function renderCanvas(index) {
     const img = images[index - 1];
     if (!img || !img.complete) return;
-
     const imgRatio = img.width / img.height;
     const canvasRatio = window.innerWidth / window.innerHeight;
     let dW, dH, dX, dY;
-
     if (canvasRatio > imgRatio) {
         dW = window.innerWidth; dH = window.innerWidth / imgRatio;
         dX = 0; dY = (window.innerHeight - dH) / 2;
@@ -58,7 +53,6 @@ function renderCanvas(index) {
         dW = window.innerHeight * imgRatio; dH = window.innerHeight;
         dX = (window.innerWidth - dW) / 2; dY = 0;
     }
-
     context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     context.drawImage(img, dX, dY, dW, dH);
 }
@@ -92,27 +86,24 @@ function goToKnowledge() {
 function goToConnect() {
     body.classList.remove('no-scroll');
     const connectSection = document.getElementById('connect');
-    connectSection.scrollIntoView({ behavior: 'smooth' });
+    if (connectSection) connectSection.scrollIntoView({ behavior: 'smooth' });
 }
 
 // --- SCROLL EVENT ---
 window.addEventListener('scroll', () => {
     if (body.classList.contains('no-scroll')) return;
-
     const scrollTop = window.scrollY;
     const windowHeight = window.innerHeight;
     const animationEnd = windowHeight * 2.0; 
     const scrollFraction = Math.min(1, scrollTop / animationEnd);
 
     targetFrame = Math.max(1, Math.min(frameCount, Math.ceil(scrollFraction * frameCount)));
-    
     if (!isAnimating) updateCanvasSmoothly();
 
     if (scrollTop > 50) {
         canvas.style.opacity = "1";
         canvas.style.zIndex = "5";
         armVideo.style.opacity = "0";
-        if (placeholder) placeholder.style.opacity = "0";
     } else {
         canvas.style.opacity = "0";
         canvas.style.zIndex = "1";
@@ -140,29 +131,53 @@ window.addEventListener('scroll', () => {
     knowledgeBtn.style.top = knowledgeBtnPos + "%";
 });
 
-// --- TIKLAMA OLAYLARI (PORTAL ZOOM ETKİSİ DAHİL) ---
+// --- PROJECTS BUTONU TIKLAMA (DÜZENLENMİŞ) ---
 armBtn.addEventListener('click', () => {
     if (window.scrollY > 100) { goToProjects(); return; }
     
     armBtn.disabled = true;
     body.classList.add('no-scroll');
-    
-    armVideo.currentTime = 0; 
-    armVideo.play();
 
-    // VİDEONUN SONUNA DOĞRU PORTAL ZOOM ETKİSİ
-    // Video bitimine 0.6 saniye kala kameranın içine giriyoruz
-    setTimeout(() => {
-        armVideo.style.transition = "transform 0.8s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.5s";
-        armVideo.style.transform = "scale(5)"; 
-        armVideo.style.opacity = "0"; 
-    }, (armVideo.duration * 1000) - 600);
+    // 1. DİĞER HER ŞEYİ GİZLE (Çakışmayı önlemek için)
+    if (placeholder) placeholder.style.opacity = "0";
+    canvas.style.opacity = "0";
+    canvas.style.zIndex = "1";
 
-    armVideo.onended = () => { 
-        window.location.href = 'projects/index.html'; 
+    // 2. VİDEOYU EN ÖNE ÇIKAR VE HAZIRLA
+    armVideo.style.display = "block"; // Gizli kalmış olma ihtimaline karşı
+    armVideo.style.opacity = "1";
+    armVideo.style.zIndex = "9999"; 
+    armVideo.currentTime = 0;
+
+    // 3. OYNATMAYI DENE
+    const startPlay = () => {
+        armVideo.play().then(() => {
+            console.log("Video başladı.");
+            
+            const vidDuration = armVideo.duration > 0 ? armVideo.duration : 2.5;
+
+            
+
+            // Yönlendirme
+            armVideo.onended = () => {
+                window.location.href = 'projects/index.html';
+            };
+        }).catch(err => {
+            console.warn("Oynatma hatası:", err);
+            window.location.href = 'projects/index.html';
+        });
     };
+
+    // Video verisi hazırsa oynat, değilse yüklenince oynat
+    if (armVideo.readyState >= 3) {
+        startPlay();
+    } else {
+        armVideo.load();
+        armVideo.oncanplay = startPlay;
+    }
 });
 
+// --- KNOWLEDGE BUTONU TIKLAMA ---
 knowledgeBtn.addEventListener('click', () => {
     goToKnowledge();
     knowledgeBtn.disabled = true;
@@ -170,6 +185,7 @@ knowledgeBtn.addEventListener('click', () => {
         body.classList.add('no-scroll');
         canvas.style.opacity = "0"; 
         roverVideo.style.opacity = "1";
+        roverVideo.style.zIndex = "50";
         roverVideo.currentTime = 0; 
         roverVideo.play();
 
@@ -182,11 +198,13 @@ knowledgeBtn.addEventListener('click', () => {
     }, 600); 
 });
 
+// --- PANEL KAPATMA ---
 closePanel.addEventListener('click', () => {
     knowledgePanel.classList.remove('active');
     roverVideo.style.opacity = "0";
     roverVideo.pause();
     roverReverseVideo.style.opacity = "1";
+    roverReverseVideo.style.zIndex = "50";
     roverReverseVideo.currentTime = 0;
     roverReverseVideo.playbackRate = 2.0; 
     roverReverseVideo.play();
@@ -202,64 +220,85 @@ closePanel.addEventListener('click', () => {
         setTimeout(() => {
             body.classList.remove('no-scroll'); 
             knowledgeBtn.disabled = false;
+            knowledgeBtn.classList.remove('btn-disabled');
         }, 300);
     };
 });
 
-// --- LOAD OLAYI VE GERİ DÖNÜŞ ---
+// --- SAYFA YÜKLENME VE GERİ DÖNÜŞ MANTIĞI ---
+// --- SAYFA YÜKLENME VE GERİ DÖNÜŞ MANTIĞI (Flicker Fix) ---
 window.addEventListener('load', () => {
     resizeCanvas();
     const comingBack = sessionStorage.getItem('returnFromProjects');
-    const placeholder = document.getElementById('videoPlaceholder');
 
-    if (placeholder) {
-        placeholder.style.transition = "none";
-        placeholder.style.opacity = "0"; 
-    }
+    // Başlangıç durumu: Zoom kapalı, video başa sarılı
+    armVideo.style.transform = "scale(1)";
+    armVideo.style.transition = "none";
+    armVideo.currentTime = 0;
 
     if (comingBack === 'true') {
         sessionStorage.removeItem('returnFromProjects');
         window.scrollTo(0, 0);
         body.classList.add('no-scroll');
 
+        // Geri dönüşte tableti olan kareyi göster (Başlangıç noktası)
         if (placeholder) {
+            placeholder.style.backgroundImage = "url('animations/render_2_png/0120.png')";
             placeholder.style.opacity = "1";
-            placeholder.style.zIndex = "10";
+            placeholder.style.zIndex = "200"; // En üstte başlasın
         }
         
         armVideo.style.opacity = "0";
-        armVideo.style.transform = "scale(1)"; // Portal zoom'u sıfırla
         tabletReverseVideo.style.opacity = "1";
-        tabletReverseVideo.style.transform = "scale(1)";
+        tabletReverseVideo.style.zIndex = "300";
         tabletReverseVideo.currentTime = 0;
-        tabletReverseVideo.play();
+        
+        const startReverse = () => { tabletReverseVideo.play().catch(() => {}); };
+        if (tabletReverseVideo.readyState >= 3) startReverse();
+        else tabletReverseVideo.oncanplay = startReverse;
 
         const checkEnd = setInterval(() => {
-            if (tabletReverseVideo.currentTime >= (tabletReverseVideo.duration - 0.2)) {
+            // Video bitimine 0.1 saniye kala geçişi hazırla
+            if (tabletReverseVideo.currentTime >= (tabletReverseVideo.duration - 0.1)) {
                 clearInterval(checkEnd);
                 
+                // 1. Videoları ve placeholder'ı anında sıfırla
+                tabletReverseVideo.pause();
+                tabletReverseVideo.style.opacity = "0";
+                
+                if (placeholder) {
+                    placeholder.style.opacity = "0";
+                    placeholder.style.zIndex = "-1"; // Arkaya at ki görünmesin
+                }
+
+                // 2. Ana videoyu (kolun boş hali) göster
                 armVideo.currentTime = 0;
                 armVideo.style.opacity = "1";
+                armVideo.style.zIndex = "1";
 
-                tabletReverseVideo.style.opacity = "0";
-                tabletReverseVideo.style.transform = "scale(0)"; 
-                if (placeholder) placeholder.style.opacity = "0";
-                
-                tabletReverseVideo.pause();
-
+                // 3. Kullanıcıya kontrolü ver
                 setTimeout(() => {
                     body.classList.remove('no-scroll');
                     armBtn.disabled = false;
                     armBtn.style.opacity = "1";
-                }, 150);
+                    console.log("Geri dönüş tamamlandı, tertemiz başlangıç.");
+                }, 50);
             }
         }, 10); 
-
     } else {
-        if (placeholder) placeholder.style.opacity = "0";
-        armVideo.style.opacity = "1";
-        armVideo.style.transform = "scale(1)"; 
-        armVideo.pause();
-        armVideo.currentTime = 0;
+        // Normal ilk giriş
+        const initMain = () => {
+            armVideo.currentTime = 0;
+            armVideo.style.opacity = "1";
+            if (placeholder) {
+                placeholder.style.opacity = "0";
+                placeholder.style.zIndex = "-1";
+            }
+        };
+        if (armVideo.readyState >= 3) initMain();
+        else armVideo.oncanplay = initMain;
     }
 });
+
+// --- PENCERE BOYUTU DEĞİŞİMİ ---
+window.addEventListener('resize', resizeCanvas);
