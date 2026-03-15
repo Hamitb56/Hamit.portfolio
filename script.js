@@ -28,7 +28,7 @@ let targetFrame = 1;
 let currentFrameIdx = 1;
 let isAnimating = false;
 
-// --- CANVAS YARDIMCI FONKSİYONLARI (KALİTE AYARLI) ---
+// --- CANVAS YARDIMCI FONKSİYONLARI ---
 function resizeCanvas() {
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
@@ -95,7 +95,7 @@ function goToConnect() {
     connectSection.scrollIntoView({ behavior: 'smooth' });
 }
 
-// --- SCROLL EVENT (GEÇİŞLER DÜZELTİLDİ) ---
+// --- SCROLL EVENT ---
 window.addEventListener('scroll', () => {
     if (body.classList.contains('no-scroll')) return;
 
@@ -108,21 +108,17 @@ window.addEventListener('scroll', () => {
     
     if (!isAnimating) updateCanvasSmoothly();
 
-    // SİYAH EKRAN VE SIÇRAMA ÖNLEYİCİ GEÇİŞ MANTIĞI
     if (scrollTop > 50) {
-        // Aşağı kaydırırken Canvas öne çıkar
         canvas.style.opacity = "1";
         canvas.style.zIndex = "5";
         armVideo.style.opacity = "0";
         if (placeholder) placeholder.style.opacity = "0";
     } else {
-        // En yukarıdayken Video öne çıkar
         canvas.style.opacity = "0";
         canvas.style.zIndex = "1";
         armVideo.style.opacity = "1";
     }
 
-    // Buton Pozisyonları
     armBtn.style.top = (50 - (scrollFraction * 80)) + "%";
     armBtn.style.opacity = Math.max(0, 1 - (scrollFraction * 3));
     armBtn.classList.toggle('btn-disabled', scrollTop !== 0);
@@ -144,14 +140,27 @@ window.addEventListener('scroll', () => {
     knowledgeBtn.style.top = knowledgeBtnPos + "%";
 });
 
-// --- TIKLAMA OLAYLARI ---
+// --- TIKLAMA OLAYLARI (PORTAL ZOOM ETKİSİ DAHİL) ---
 armBtn.addEventListener('click', () => {
     if (window.scrollY > 100) { goToProjects(); return; }
+    
     armBtn.disabled = true;
     body.classList.add('no-scroll');
+    
     armVideo.currentTime = 0; 
     armVideo.play();
-    armVideo.onended = () => { window.location.href = 'projects/index.html'; };
+
+    // VİDEONUN SONUNA DOĞRU PORTAL ZOOM ETKİSİ
+    // Video bitimine 0.6 saniye kala kameranın içine giriyoruz
+    setTimeout(() => {
+        armVideo.style.transition = "transform 0.8s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.5s";
+        armVideo.style.transform = "scale(5)"; 
+        armVideo.style.opacity = "0"; 
+    }, (armVideo.duration * 1000) - 600);
+
+    armVideo.onended = () => { 
+        window.location.href = 'projects/index.html'; 
+    };
 });
 
 knowledgeBtn.addEventListener('click', () => {
@@ -197,31 +206,29 @@ closePanel.addEventListener('click', () => {
     };
 });
 
-// --- LOAD OLAYI VE GERİ DÖNÜŞ (KONTROLLÜ AÇILIŞ) ---
+// --- LOAD OLAYI VE GERİ DÖNÜŞ ---
 window.addEventListener('load', () => {
     resizeCanvas();
     const comingBack = sessionStorage.getItem('returnFromProjects');
     const placeholder = document.getElementById('videoPlaceholder');
 
-    // 1. Önce her şeyi bir temizleyelim (F5/İlk açılış güvenliği)
     if (placeholder) {
-        placeholder.style.transition = "none"; // F5 anında animasyon istemiyoruz
+        placeholder.style.transition = "none";
         placeholder.style.opacity = "0"; 
     }
 
     if (comingBack === 'true') {
-        // --- SADECE GERİ DÖNÜŞ SENARYOSU ---
         sessionStorage.removeItem('returnFromProjects');
         window.scrollTo(0, 0);
         body.classList.add('no-scroll');
 
-        // Geri dönüşte fotoğrafı ve ters videoyu aktif et
         if (placeholder) {
             placeholder.style.opacity = "1";
             placeholder.style.zIndex = "10";
         }
         
         armVideo.style.opacity = "0";
+        armVideo.style.transform = "scale(1)"; // Portal zoom'u sıfırla
         tabletReverseVideo.style.opacity = "1";
         tabletReverseVideo.style.transform = "scale(1)";
         tabletReverseVideo.currentTime = 0;
@@ -234,7 +241,6 @@ window.addEventListener('load', () => {
                 armVideo.currentTime = 0;
                 armVideo.style.opacity = "1";
 
-                // Katmanlı gizleme
                 tabletReverseVideo.style.opacity = "0";
                 tabletReverseVideo.style.transform = "scale(0)"; 
                 if (placeholder) placeholder.style.opacity = "0";
@@ -250,12 +256,9 @@ window.addEventListener('load', () => {
         }, 10); 
 
     } else {
-        // --- NORMAL AÇILIŞ VEYA F5 SENARYOSU ---
-        // Fotoğrafın görünmesine gerek yok, direkt ana videoyu göster
         if (placeholder) placeholder.style.opacity = "0";
         armVideo.style.opacity = "1";
-        
-        // Videonun ilk karesinde kalmasını sağla (oynatma)
+        armVideo.style.transform = "scale(1)"; 
         armVideo.pause();
         armVideo.currentTime = 0;
     }
