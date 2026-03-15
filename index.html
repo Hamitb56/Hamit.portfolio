@@ -3,157 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamit Budak Portfolio</title>
-    <link rel="icon" type="image/png" href="photos/icon.png">
+    <title>Hamit Budak | Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="photos/icon.png">
 </head>
-
 <body>
-    <div class="overlay"></div>
-    <nav class="navbar">
-        <div class="header-container">
-            <img src="photos/icon.png" alt="Logo" class="nav-logo">
 
-            <div class="header-info">
-                <h1 class="header-name">Hamit Budak</h1>
-                <div class="contact-links">
-                    <a href="mailto:hamitb56@gmail.com">hamitb56@gmail.com</a>
-                    <span class="separator">|</span>
-                    <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LinkedIn</a>
-                </div>
-            </div>
-        </div>
-        <div class="power-switch-container">
-            <label class="switch">
-                <input type="checkbox" id="power-toggle"> <span class="slider"></span>
-            </label>
-            <span class="switch-text" id="switch-status">PLUG IN</span>
-        </div>
-        <div style="display:none;">
-            <img src="photos/plugin.png">
-            <img src="photos/plugout.png">
+    <nav class="navbar">
+        <div class="nav-logo">HAMİT BUDAK</div>
+        <div class="nav-links">
+            <a onclick="goToProjects();">Projects</a>
+            <a onclick="goToKnowledge();">Knowledge</a>
+            <a onclick="goToConnect();">Connect</a>
         </div>
     </nav>
 
-    <main class="projects-container">
-        
-        <a href="projects/thesis/index.html" class="project-card">
-            <img src="photos/Tez.webp" alt="Final Thesis">
-            <div class="project-overlay">
-                <h3>FINAL THESIS</h3>
-                <p>Autonomous Indoor Navigating Robot</p>
-            </div>
-        </a>
+    <main class="hero-area">
+        <div class="sticky-wrapper">
+            <div id="videoPlaceholder" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('animations/render_2_png/0120.png') center/cover no-repeat; z-index: 10; opacity: 1; pointer-events: none; transition: opacity 0.5s ease;"></div>
 
-        <a href="projects/rover/index.html" class="project-card">
-            <img src="photos/rover.webp" alt="Earendil Rover">
-            <div class="project-overlay">
-                <h3>EARENDIL ROVER</h3>
-                <p>Autonomous Mobile Robots</p>
-            </div>
-        </a>
+            <video id="myVideo" muted playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; z-index: 1;">
+                <source src="animations/render_2_video/tablet_getir.mp4" type="video/mp4">
+            </video>
 
-        <a href="projects/internship1/index.html" class="project-card">
-            <img src="photos/intern1.webp" alt="Internship 1">
-            <div class="project-overlay">
-                <h3>INTERNSHIP 1</h3>
-                <p>Cloud and Digitalization</p>
-            </div>
-        </a>
+            <video id="tabletReverseVideo" muted playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 11; opacity: 0; pointer-events: none;">
+                <source src="animations/render_2_video_reverse/0001-0120.mp4" type="video/mp4">
+            </video>
+            
+            <canvas id="roverCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; opacity: 0; pointer-events: none;"></canvas>
+            
+            <video id="roverVideo" muted playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 6; opacity: 0; pointer-events: none;">
+                <source src="animations/render_rover_video/0026-0105.mp4" type="video/mp4">
+            </video>
 
-        <a href="projects/internship2/index.html" class="project-card">
-            <img src="photos/intern2.webp" alt="Internship 2">
-            <div class="project-overlay">
-                <h3>INTERNSHIP 2</h3>
-                <p>Planning and Drawing Projects</p>
-            </div>
-        </a>
-
-        <a href="projects/hospital/index.html" class="project-card">
-            <img src="photos/kocaeli.webp" alt="Kocaeli City Hospital">
-            <div class="project-overlay">
-                <h3>KOCAELI CITY HOSPITAL</h3>
-                <p>Project Following and Leading</p>
-            </div>
-        </a>
-        
-        <a href="projects/boards/index.html" class="project-card">
-            <img src="photos/board.webp" alt="boards">
-            <div class="project-overlay">
-                <h3>BOARDS DESIGN</h3>
-                <p>University Projects</p>
-            </div>
-        </a>
-
-        <a href="projects/light/index.html" class="project-card">
-            <img src="photos/light.webp" alt="Light">
-            <div class="project-overlay">
-                <h3>LIGHT TRACKING MOTOR</h3>
-                <p>Motor Following To Light</p>
-            </div>
-        </a>
-
-        <a href="projects/image/index.html" class="project-card">
-            <img src="photos/car.webp" alt="CAR">
-            <div class="project-overlay">
-                <h3>VEHICLE COUNTER</h3>
-                <p>MATLAB Vehicle Counter by Image Proccessing</p>
-            </div>
-        </a>
-
-        <a href="projects/burglary/index.html" class="project-card">
-            <img src="photos/burglary.webp" alt="Kocaeli City Hospital">
-            <div class="project-overlay">
-                <h3>BURGLARY CONTROLLER</h3>
-                <p>Lead and Lag Compansator to Burglar</p>
-            </div>
-        </a>
-
-        <a href="projects/protocol/index.html" class="project-card">
-            <img src="photos/redap.webp" alt="Kocaeli City Hospital">
-            <div class="project-overlay">
-                <h3>PERSONAL PROTOCOL</h3>
-                <p>Reliable Data Protocol</p>
-            </div>
-        </a>
-        
+            <video id="roverReverseVideo" muted playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 6; opacity: 0; pointer-events: none;">
+                <source src="animations/render_rover_video_reverse/rover_reverse.mp4" type="video/mp4">
+            </video>
+        </div>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://github.com/elektrikman56" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LinkedIn</a>
-                <a href="mailto:hamitb56@gmail.com">E-mail</a>
+    <div id="knowledgePanel" class="glass-panel">
+        <div class="panel-content">
+            <button id="closePanel" class="close-btn">&times;</button>
+            <h2>ENGINEERING KNOWLEDGE</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <p>Mechanical Design & Manufacturing / SolidWorks - FreeCAD</p>
+                    <div class="skill-bar"><div class="fill" style="width: 83%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <p>Robotics & Autonomous Systems / ROS2 - Lidar - Navigation</p>
+                    <div class="skill-bar"><div class="fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <p>Embedded Systems & PCB Design / C - Assembly - Proteus</p>
+                    <div class="skill-bar"><div class="fill" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <p>3D Animation & Rendering / Blender</p>
+                    <div class="skill-bar"><div class="fill" style="width: 75%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <p>Software & Data Analysis / Python - MATLAB - MSSQL</p>
+                    <div class="skill-bar"><div class="fill" style="width: 65%;"></div></div>
+                </div>
             </div>
         </div>
-    </footer>
-    <script>
-        const toggle = document.getElementById('power-toggle');
-        const statusText = document.getElementById('switch-status');
+    </div>
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
-        const systemState = localStorage.getItem('portfolio-power');
+    <div class="side-btn-container">
+        <button class="action-btn" id="playBtn">Projects</button>
+        <button class="action-btn" id="knowledgeBtn">Knowledge</button>
+    </div>
 
-        if (systemState === 'on') {
-            toggle.checked = true;
-            document.body.classList.add('system-on');
-            statusText.innerText = "PLUG OUT";
-        }
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
+        </div>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
-        toggle.addEventListener('change', function() {
-            if (this.checked) {
-                document.body.classList.add('system-on');
-                statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
-            } else {
-                document.body.classList.remove('system-on');
-                statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
