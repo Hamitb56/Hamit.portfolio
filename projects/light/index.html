@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">LIGHT TRACKING MOTOR</h1>
-                <p class="header-subtitle">Term Project: Sun-Tracking System Prototype</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">LIGHT TRACKING MOTOR</h1>
+            <p class="header-subtitle">Term Project: Sun-Tracking System Prototype</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -42,51 +47,44 @@
                         automated orientation. It involves the design and implementation of a light-tracking 
                         system that automatically aligns a DC motor with the strongest light source. By utilizing 
                         Light Dependent Resistors (LDRs) as sensors, the system creates a feedback loop that 
-                        determines the direction of movement based on differential light intensity. The core of 
-                        the project focuses on hardware-level direction control without the need for complex 
-                        microcontrollers in its most basic form.
+                        determines the direction of movement based on differential light intensity.
                     </p>
                 </div>
             </div>
 
-
             <h3>Working Principle & Circuit Architecture</h3>
             <p>
-            The system operates by comparing the resistance values of two LDRs placed on opposite sides of the 
-            tracker. The balanced state is achieved when both sensors receive equal light. When an imbalance occurs, 
-            the following process is triggered:            
+                The system operates by comparing the resistance values of İki LDRs placed on opposite sides of the 
+                tracker. The balanced state is achieved when both sensors receive equal light.
             </p>
 
             <ul>
                 <li><strong>Dual-Sensor Comparison:</strong> LDRs act as variable resistors in a voltage divider 
                 circuit, where light intensity is converted into a voltage signal.</li>
                 <li><strong>Diode-Based H-Bridge Implementation:</strong> To control the DC motor's direction 
-                (clockwise and counter-clockwise), a custom H-Bridge circuit was designed. By using a specific 
-                arrangement of diodes and transistors (or switches), the circuit reverses the polarity of the voltage 
-                applied to the motor based on which LDR is triggered.</li>
+                a custom H-Bridge circuit was designed. By using a specific arrangement of diodes and transistors, 
+                the circuit reverses the polarity applied to the motor.</li>
                 <li><strong>Bidirectional Control:</strong> This bridge configuration allows the motor to rotate 
-                towards the light source until the LDRs reach an equilibrium, effectively "tracking" the light in 
+                towards the light source until the LDRs reach an equilibrium, effectively tracking light in 
                 real-time.</li>
             </ul>
-            
-
-            
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - Control Systems Project</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -95,16 +93,15 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on');
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off');
             }
         });
     </script>

@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">INTERNSHIP 1</h1>
-                <p class="header-subtitle">Cloud and Digitalization</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">INTERNSHIP 1</h1>
+            <p class="header-subtitle">Cloud and Digitalization</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -58,15 +63,16 @@
                 motherboard-level failures.</li> 
             </ul>
 
-
             <div class="project-triple-row">
                 <div class="triple-item">
                     <img src="../../photos/access.webp" alt="Experience 1">
                 </div>
                 <div class="triple-item">
-                    <img src="../../photos/datacenter.webp" alt="Experience 2"> </div>
+                    <img src="../../photos/datacenter.webp" alt="Experience 2"> 
+                </div>
                 <div class="triple-item">
-                    <img src="../../photos/vmware.webp" alt="Experience 3"> </div>
+                    <img src="../../photos/vmware.webp" alt="Experience 3"> 
+                </div>
             </div>
 
             <p>
@@ -77,19 +83,21 @@
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - Internship Experience</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        // 1. HAFIZAYI KONTROL ET
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -98,16 +106,16 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        // 2. DÜĞMEYE BASILDIĞINDA
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on'); 
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off'); 
             }
         });
     </script>

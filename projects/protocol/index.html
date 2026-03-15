@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">REDAP PROTOCOL</h1>
-                <p class="header-subtitle">Custom Data Transfer Protocol Design</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">REDAP PROTOCOL</h1>
+            <p class="header-subtitle">Custom Data Transfer Protocol Design</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -34,35 +39,23 @@
             <p>
                 ReDaP is a lightweight, reliable transport layer protocol built on top of UDP, 
                 designed to bridge the gap between the speed of connectionless protocols and the 
-                reliability of TCP. This project involved defining a custom RFC (Request for Comments) 
-                specification and implementing a complete Sender/Receiver architecture in Python. The 
-                protocol is optimized for experimental and real-time applications where low overhead is 
-                critical, but data integrity must be guaranteed.            
+                reliability of TCP. This project involved defining a custom RFC specification 
+                and implementing a complete Sender/Receiver architecture in Python.
             </p>
 
             <h3>Technical Architecture & Protocol Specifications</h3>
-            
             <ul>
-                <li><strong>Reliability Mechanism:</strong> Implemented a Stop-and-Wait ARQ (Automatic Repeat Request) 
-                mechanism, ensuring that only one unacknowledged data packet is in flight at any time to prevent data loss.</li>
-                <li><strong>Error Detection:</strong> Developed a 16-bit one’s complement checksum algorithm that validates data 
-                integrity at the word level; corrupted packets are automatically discarded and triggered for 
-                retransmission via NACK or timeout.</li>
-                <li><strong>Packet Structure:</strong> Designed a custom 10-byte fixed header comprising Message Type 
-                (DATA, ACK, NACK), Flags (LAST, RETRANSMIT), Sequence Numbers, and Checksum fields.</li>
-                <li><strong>Sequencing & Flow:</strong> Utilized 16-bit sequence numbers to handle packet ordering and 
-                wrap-around logic, allowing for the reliable transmission of large files by splitting them into 512-byte 
-                payload chunks.</li>
-                <li><strong>Dynamic Retransmission:</strong> Engineered a timeout-based system (suggested at 500ms) with 
-                a maximum retry limit (5 retries) to handle network congestion or packet drops effectively.</li>
+                <li><strong>Reliability Mechanism:</strong> Implemented a Stop-and-Wait ARQ mechanism, ensuring data integrity without overhead.</li>
+                <li><strong>Error Detection:</strong> Developed a 16-bit one’s complement checksum algorithm to validate packets at the word level.</li>
+                <li><strong>Packet Structure:</strong> Designed a custom 10-byte fixed header comprising Message Type, Flags, Sequence Numbers, and Checksum.</li>
+                <li><strong>Sequencing & Flow:</strong> Utilized 16-bit sequence numbers to handle packet ordering and large file transmissions in 512-byte chunks.</li>
+                <li><strong>Dynamic Retransmission:</strong> Engineered a timeout-based system to handle network congestion or packet drops effectively.</li>
             </ul>
 
-            
             <div class="project-sender-receiver">
                 <div class="terminal-sender">
                     <img src="../../photos/sender.png" alt="REDAP Protocol Sender">
                 </div>
-
                 <div class="terminal-receiver">
                     <img src="../../photos/receiver.png" alt="REDAP Protocol Receiver">
                 </div>
@@ -70,30 +63,27 @@
 
             <h3>Software Implementation (Python)</h3>
             <ul>
-                <li><strong>Socket Programming:</strong> Developed asynchronous communication scripts using Python’s 
-                socket and struct libraries to handle raw UDP datagrams and binary header packing/unpacking.</li>
-                <li><strong>Performance Metrics:</strong> The implementation tracks and reports real-time statistics, 
-                including throughput (KB/s), retransmission counts, and total elapsed time to evaluate network 
-                efficiency.</li>
-                <li><strong>User Interface:</strong> Integrated a tkinter file-dialog system in the Sender module to 
-                allow seamless selection and transmission of any file type across the ReDaP network.</li>
+                <li><strong>Socket Programming:</strong> Developed asynchronous communication scripts using Python’s socket and struct libraries.</li>
+                <li><strong>Performance Metrics:</strong> Tracks real-time statistics including throughput (KB/s) and retransmission counts.</li>
+                <li><strong>User Interface:</strong> Integrated a tkinter file-dialog system for seamless file selection and transmission.</li>
             </ul>
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - Computer Networking & Protocols</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -102,16 +92,15 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on');
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off');
             }
         });
     </script>

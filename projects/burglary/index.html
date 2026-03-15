@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burglary Analytics & Control Systems - Hamit Budak</title>
+    <title>System Modeling & Optimization - Hamit Budak</title>
     <link rel="icon" type="image/png" href="../../photos/icon.png">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">SYSTEM MODELING & OPTIMIZATION</h1>
-                <p class="header-subtitle">Data Mining, Linear Regression & Control Theory Research</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">SYSTEM MODELING</h1>
+            <p class="header-subtitle">Data Mining & Control Theory Research</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -30,94 +35,76 @@
 
     <main class="content-wrapper">
         <article class="project-details">
-            <div class="project-header-row">
+            <div class="project-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
                 <h2>Modeling Criminal Systems</h2>
-                
                 <div class="pdf-link-container">
-                    <a href="../../documents/Hamit_Budak_Begüm_Övüç.pdf" target="_blank" class="pdf-button">
-                        <span class="pdf-icon">📄</span>
-                        View Full Article
+                    <a href="../../documents/Hamit_Budak_Begüm_Övüç.pdf" target="_blank" class="nav-btn" style="background: rgba(0, 212, 255, 0.1); border-color: #00d4ff; color: #00d4ff;">
+                        <span class="pdf-icon">📄</span> View Full Article
                     </a>
                 </div>
             </div>
+
             <p>
                 This interdisciplinary research treats the process of burglary as a dynamic, controllable 
-                system rather than a random event. By applying Data Mining techniques, a comprehensive dataset 
-                was constructed from over 100 real-world-based experimental samples, incorporating more than 20 
-                distinct variables. The project demonstrates the power of Linear Regression and Control Theory 
-                in quantifying human behavior and optimizing complex systems.            
+                system rather than a random event. By applying Data Mining techniques, a dataset 
+                was constructed from over 100 real-world samples. The project demonstrates the power of 
+                Linear Regression and Control Theory in quantifying human behavior.
             </p>
             
-            <h3>The Dataset: 100+ Samples & Multidimensional Variables</h3>
+            <h3>The Dataset: 100+ Samples</h3>
             <p>
-                The strength of this model lies in its diverse data sources. To achieve high predictive accuracy, 
-                the following parameters were meticulously analyzed for each of the 100+ cases:
+                The following parameters were analyzed for predictive accuracy:
             </p>
             <ul>
-                <li><strong>Offender Profile:</strong> Age, years of experience, and whether they acted according 
-                to a pre-defined plan.</li>
-                <li><strong>Property Characteristics:</strong> House type (detached, apartment), presence of 
-                security systems (alarms, cameras), and the type of locks used.</li>
-                <li><strong>Environmental Factors:</strong> Location of the property, presence of witnesses, 
-                and the specific time of the incident.</li>
-                <li><strong>Victim Profile:</strong> Income level and homeowner habits.</li>
+                <li><strong>Offender Profile:</strong> Age, experience, and strategic planning.</li>
+                <li><strong>Property Characteristics:</strong> Security systems, house type, and lock mechanisms.</li>
+                <li><strong>Environmental Factors:</strong> Location, witness presence, and timing.</li>
+                <li><strong>Victim Profile:</strong> Income level and behavioral habits.</li>
             </ul>
-            <h3>
-                Small part of the samples:
-            </h3>
-            
-            <div class="photos-burglary_datas">
-                 <img src="../../photos/burglary_datas.png" alt="MATLAB Vehicle Detection Analysis">
-             </div>
-                
 
+            <h3 style="margin-top: 30px;">Small part of the samples:</h3>
+            <div class="project-images" style="width: 100%; max-width: 800px; margin: 20px auto;">
+                 <img src="../../photos/burglary_datas.png" alt="Burglary Dataset Samples" style="width: 100%; border-radius: 15px; border: 1px solid rgba(0, 212, 255, 0.2);">
+            </div>
 
             <h3>Mathematical Modeling & Compensator Design</h3>
             <p>
-                Using MATLAB, the data was processed through supervised learning models to predict two 
-                primary outputs: Financial Loss (USD) and Operation Duration (Minutes). To further "perfect" 
-                the efficiency of this system, I designed classical control compensators:
+                Using MATLAB, I designed classical control compensators to analyze system efficiency:
             </p>
             <ul>
-                <li><strong>Linear Regression:</strong> Used to establish the baseline relationship between 
-                input variables (like experience and planning) and the resulting outputs.</li>
-                <li><strong>Lead Compensator:</strong> Designed to increase the system's response speed, 
-                analyzing how time efficiency is optimized within the criminal process.</li>
-                <li><strong>Lag Compensator:</strong> Implemented to reduce steady-state error, ensuring the 
-                predicted results align with the actual outcomes with a damping ratio of ζ = 0.7 and a 
-                settling time of <i>𝓣</i><sub>s</sub> = 660 ms.</li>
-                <li><strong>Root Locus Analysis:</strong> Conducted using the sisotool to ensure the stability 
-                of the transfer function <i>𝐆(s)</i> under varying gain (𝒦) conditions.</li>
+                <li><strong>Linear Regression:</strong> Establishing baseline relationships between variables.</li>
+                <li><strong>Lead Compensator:</strong> Increasing system response speed and time optimization.</li>
+                <li><strong>Lag Compensator:</strong> Reducing steady-state error (damping ratio ζ = 0.7).</li>
+                <li><strong>Root Locus Analysis:</strong> Ensuring stability under varying gain conditions.</li>
             </ul>
 
-            <h3>Example of One Burglar After Lead and Lag Compansator:</h3>
-            <div class="photos-burglary_matlab">
-                 <img src="../../photos/burglary_matlab.webp" alt="MATLAB Vehicle Detection Analysis">
-             </div>
+            <h3>Control System Analysis (Lead & Lag):</h3>
+            <div class="project-images" style="width: 100%; max-width: 800px; margin: 20px auto;">
+                 <img src="../../photos/burglary_matlab.webp" alt="MATLAB Control System Analysis" style="width: 100%; border-radius: 15px; border: 1px solid rgba(0, 212, 255, 0.2);">
+            </div>
+
             <h3>Engineering Impact</h3>
             <p>
-                This study provides a novel perspective by merging Criminology with Electrical Engineering. 
-                It proves that even non-linear social events can be modeled, predicted, and optimized using 
-                transfer functions and feedback loops. This project has provided me with deep expertise in 
-                statistical data analysis, system dynamics, and MATLAB-based control system design.
+                This study proves that non-linear social events can be modeled using transfer functions. 
+                It demonstrates expertise in statistical data analysis and MATLAB-based control design.
             </p>
-            
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - Control & Data Research</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -126,16 +113,15 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on');
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off');
             }
         });
     </script>

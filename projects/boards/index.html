@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">BOARD DESIGN & LAB SKILLS</h1>
-                <p class="header-subtitle">PCB Design, Breadboard Prototyping & Lab Equipment</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">BOARD DESIGN & LAB SKILLS</h1>
+            <p class="header-subtitle">PCB Design, Breadboard Prototyping & Lab Equipment</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -35,10 +40,9 @@
                 Throughout an intensive academic semester, I successfully designed, simulated, and prototyped a series 
                 of over 10 specialized electronic projects. This laboratory series followed a rigorous engineering workflow: 
                 starting with Proteus simulations to validate circuit logic, followed by physical breadboarding and 
-                concluding with formal technical reporting. The series progressed from building essential laboratory 
-                tools to designing complex automated systems using analog and digital components.
+                concluding with formal technical reporting.
             </p>
-            <h3>Electronic Circuits & Systems Design Laboratory</h3>
+            <h3>Laboratory Fundamentals</h3>
             <p>
                 The semester began with the construction of my own laboratory equipment, which served as the power and 
                 signal base for subsequent experiments:
@@ -55,11 +59,11 @@
                 <div class="project-image-item power-supply">
                     <img src="../../photos/power_supply.jpg" alt="Power Supply Unit Design">
                 </div>
-
                 <div class="project-image-item motor-drive">
                     <img src="../../photos/motor-drive.png" alt="Motor Drive Circuit Design">
                 </div>
             </div>
+
             <h3>Electronics Design Lab</h3>
             <p>
                 The laboratory work covered a wide range of electronic principles and component integrations:
@@ -69,9 +73,9 @@
                 IC and PTC/NTC thermistors. The circuit was engineered to trigger an audible alert based on specific thermal 
                 thresholds.</li>
                 <li><strong>Operational Amplifier (Op-Amp) Applications:</strong> Implemented various Op-Amp configurations, 
-                including comparators, integrators, and differentiators, to process analog signals and manage sensor data.</li>
-                <li><strong>Light-Sensitive Tracking (Final Project):</strong> The series culminated in an LDR-based solar 
-                tracking system (detailed in a separate section), which combined bridge circuits and differential 
+                including comparators, integrators, and differentiators.</li>
+                <li><strong>Light-Sensitive Tracking:</strong> The series culminated in an LDR-based solar 
+                tracking system, which combined bridge circuits and differential 
                 sensing to achieve autonomous motion.</li>
             </ul>
 
@@ -81,28 +85,23 @@
                 <div class="skill-item">Rapid Prototyping</div>
                 <div class="skill-item">Hardware Debugging</div>
             </div>
-
-            
-
-            
-
-            
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - Electronics Experience</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -111,16 +110,15 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on');
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off');
             }
         });
     </script>

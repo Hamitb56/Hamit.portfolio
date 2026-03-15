@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">FINAL THESIS</h1>
-                <p class="header-subtitle">Autonomous Indoor Navigating Robot</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">FINAL THESIS</h1>
+            <p class="header-subtitle">Autonomous Indoor Navigating Robot</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -30,7 +35,7 @@
 
     <main class="content-wrapper">
         <article class="project-details">
-            <h2>Lıdar Mapping & ROS2</h2>
+            <h2>Lidar Mapping & ROS2</h2>
             <div class="project-main-content">
                 <div class="project-images-vertical">
                     <img src="../../photos/Tez.webp" alt="Robot Profile"> 
@@ -42,13 +47,9 @@
                         mobile robot optimized for indoor environments using the ROS 2 (Jazzy) framework. 
                         The system architecture is built on a hybrid control model where high-level 
                         decision-making and sensor processing are handled by a Raspberry Pi 5, while low-level 
-                        actuator synchronization and real-time tasks are managed by an Arduino Mega 2560. The
-                        robot features a triangular chassis equipped with three omni-directional wheels, 
-                        providing full mobility in any direction and enabling precise maneuvering in confined 
-                        spaces, such as narrow corridors as small as 60 cm..
+                        actuator synchronization and real-time tasks are managed by an Arduino Mega 2560.
                     </p>
                 </div>
-                
             </div>
             
             <p>
@@ -56,12 +57,9 @@
                 for hardware limitations, specifically a faulty wheel encoder and mechanical drift. To 
                 overcome this without increasing costs, I implemented a custom virtual encoder algorithm 
                 that estimates motion using motor commands and physical constraints, achieving a 
-                deviation rate of less than 2%. For environmental perception, an RPLIDAR A2M8 sensor 
-                provides 360-degree real-time distance measurements. Rather than relying on resource-heavy 
-                standard SLAM toolboxes, I developed a lightweight mapping solution based on Bresenham’s 
-                Line Algorithm, which efficiently transforms LIDAR data into a 2D occupancy grid map while 
-                maintaining high performance on embedded hardware.
+                deviation rate of less than 2%. 
             </p>
+
             <div class="project-LIDAR">
                 <div class="lidar-item">
                     <img src="../../photos/tez1.webp" alt="LIDAR mapping 1">
@@ -70,35 +68,30 @@
                     <img src="../../photos/tez2.webp" alt="LIDAR mapping 2">
                 </div>
             </div>
+
             <p>
                 The navigation pipeline utilizes a custom-designed dynamic path planning and obstacle 
                 avoidance strategy. This system analyzes environmental data across four distinct zones—front, 
                 rear, left, and right—to make instantaneous trajectory adjustments. By employing a rule-based 
-                reaction matrix, the robot can detect and bypass both static and dynamic obstacles, such as 
-                furniture or moving objects, with a mapping accuracy of approximately 95% in open areas. This 
-                project demonstrates that sophisticated autonomous functionalities, including real-time mapping 
-                and collision-free navigation, can be successfully achieved using cost-effective hardware 
-                through software optimization and robust modular integration.
+                reaction matrix, the robot can detect and bypass both static and dynamic obstacles.
             </p>
-
-            
-
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - Final Thesis Project</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -107,16 +100,15 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on');
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off');
             }
         });
     </script>

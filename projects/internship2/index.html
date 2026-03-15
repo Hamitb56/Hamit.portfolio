@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">INTERNSHIP 2</h1>
-                <p class="header-subtitle">Planning and Drawing Projects</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">INTERNSHIP 2</h1>
+            <p class="header-subtitle">Planning and Drawing Projects</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -37,29 +42,26 @@
                 infrastructure, specifically through advanced AutoCAD implementation.
             </p>
             
-            <h3>
-                Electrical Systems & AutoCAD Design
-            </h3>
-            <article class="project-sub-section">
-                <div class="project-main-content">
-                    <div class="project-description">
-                        <p>
-                            During my internship at Pendik Municipality, I took an active role in transforming 
-                            architectural blueprints into functional electrical projects by managing specialized 
-                            layers for lighting, power, and low-current systems. My work involved designing 
-                            comprehensive floor plans where I calculated Load Schedules to ensure phase balance 
-                            and determined appropriate breaker values for high-power industrial equipment. 
-                            Every design was verified through rigorous voltage drop and current-carrying capacity 
-                            calculations, ensuring compliance with the 1.5% statutory limit for safety and 
-                            efficiency.
-                        </p>
-                    </div>
-
-                    <div class="project-images-vertical">
-                        <img src="../../photos/intern22.webp" alt="Internship 2 Experience">
-                    </div>
+            <h3>Electrical Systems & AutoCAD Design</h3>
+            
+            <div class="project-main-content">
+                <div class="project-description">
+                    <p>
+                        During my internship at Pendik Municipality, I took an active role in transforming 
+                        architectural blueprints into functional electrical projects by managing specialized 
+                        layers for lighting, power, and low-current systems. My work involved designing 
+                        comprehensive floor plans where I calculated Load Schedules to ensure phase balance 
+                        and determined appropriate breaker values for high-power industrial equipment. 
+                        Every design was verified through rigorous voltage drop and current-carrying capacity 
+                        calculations, ensuring compliance with the 1.5% statutory limit for safety and 
+                        efficiency.
+                    </p>
                 </div>
-            </article>
+
+                <div class="project-images-vertical">
+                    <img src="../../photos/intern22.webp" alt="Internship 2 Experience">
+                </div>
+            </div>
 
             <section class="project-triple-row">
                 <div class="triple-item">
@@ -82,19 +84,21 @@
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - Internship Experience</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        // Hafıza Kontrolü
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -103,16 +107,16 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        // Switch İşlevi
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on');
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off');
             }
         });
     </script>

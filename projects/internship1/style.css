@@ -1,81 +1,168 @@
-/* Genel Sayfa Ayarları */
+/* --- GENEL SIFIRLAMA VE TEMEL AYARLAR --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000;
     background-image: url('../../photos/arkaplan.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
-    display: flex;
-    flex-direction: column;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* Navbar */
+/* --- SİSTEM PERDESİ (OVERLAY) --- */
+.overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000;
+    opacity: 0.95; 
+    z-index: 5; 
+    pointer-events: none;
+    transition: opacity 1.5s ease-in-out;
+}
+body.system-on .overlay { opacity: 0.3; }
+
+/* --- NAVBAR (80px Modern Tasarım) --- */
 .navbar {
-    width: 100%;
-    height: 140px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    justify-content: center;
+    width: 100%; height: 80px;
+    display: flex; 
+    justify-content: space-between; 
     align-items: center;
+    padding: 0 50px; 
+    background: rgba(0,0,0,0.95);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    position: fixed; top: 0; left: 0;
     z-index: 1000;
+    backdrop-filter: blur(15px);
 }
 
-.header-container {
+/* Sol Alan: Navigasyon Butonları */
+.nav-left {
     display: flex;
     align-items: center;
-    gap: 40px;
-    width: 85%;
+    gap: 15px;
+    flex: 1;
 }
 
-.back-button {
+.nav-btn {
     text-decoration: none;
-    color: #00d4ff;
+    color: #fff;
     font-weight: bold;
-    border: 1px solid #00d4ff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    transition: 0.3s;
-    white-space: nowrap;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    transition: 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.back-button:hover {
-    background: #00d4ff;
-    color: white;
+.nav-btn:hover {
+    color: #00d4ff;
+    border-color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
 }
 
-.header-info h1 {
-    font-size: 2.2rem;
-    margin: 0;
+/* Sayfa Başlığı (Tam Orta) */
+.header-info {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+}
+
+.header-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 .header-subtitle {
-    margin: 5px 0 0 0;
+    font-size: 10px;
     color: #00d4ff;
-    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-/* İçerik */
-.content-wrapper {
+/* Sağ Alan: Power Switch */
+.nav-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     flex: 1;
+}
+
+.power-switch-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 35px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    transition: 0.4s ease-in-out;
+    background-image: url('../../photos/plugin.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+input:checked + .slider {
+    background-image: url('../../photos/plugout.png');
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+}
+
+.switch-text {
+    font-size: 11px;
+    font-weight: bold;
+    color: #00d4ff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* --- İÇERİK ALANI --- */
+.content-wrapper {
+    position: relative;
+    z-index: 10; 
+    margin-top: 60px;
+    padding: 60px 20px;
     display: flex;
     justify-content: center;
-    padding: 60px 20px;
 }
 
+/* Bu bloğu bul ve içindekileri şununla değiştir veya ekle */
 .project-details {
     max-width: 900px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 50px;
+    background: rgba(0, 0, 0, 0.6); /* Şeffaf siyah zemin */
+    backdrop-filter: blur(10px);    /* İŞTE BUZLU CAM EFEKTİ BU */
+    -webkit-backdrop-filter: blur(10px); /* Safari desteği için */
     border-radius: 20px;
-    line-height: 1.8;
+    padding: 20px 50px;
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Çok hafif belirgin kenarlık */
+    /* ...diğer mevcut kodların... */
 }
 
 .project-details h2 {
@@ -83,244 +170,81 @@ body {
     border-left: 4px solid #00d4ff;
     padding-left: 15px;
     margin-bottom: 20px;
-}
-.project-details ul {
-    list-style: none;
-    padding: 0;
+    margin-top: 20px;
 }
 
-.project-details li {
-    margin-bottom: 15px;
-    padding-left: 30px;
-    position: relative;
-}
+.project-details ul { list-style: none; padding: 0; }
+.project-details li { margin-bottom: 15px; padding-left: 30px; position: relative; }
+.project-details li::before { content: "🌐"; position: absolute; left: 0; color: #00d4ff; }
 
-.project-details li::before {
-    content: "🌐";
-    position: absolute;
-    left: 0;
-    color: #00d4ff;
-}
-
-.project-images img {
-    width: 100%;
-    border-radius: 15px;
-    margin: 40px 0;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-/* Footer */
-.footer {
-    background: rgba(0, 0, 0, 0.9);
-    padding: 30px 0;
-    text-align: center;
-    margin-top: auto;
-}
-
-.social-links a {
-    color: #00d4ff;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: 600;
-}
-
-.social-links a:hover {
-    color: white;
-}
-/* --- POWER SWITCH SİSTEMİ (PROJE SAYFALARI İÇİN) --- */
-
-/* 1. Sistem Perdesi (Overlay) Güncellemesi */
-/* Bu kısmı mevcut .overlay kodun varsa onunla değiştir veya en alta ekle */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    opacity: 1; /* Başlangıçta karanlık */
-    z-index: -1; /* Arkaplanın önünde, yazıların arkasında */
-    transition: opacity 1.5s ease-in-out;
-    pointer-events: none;
-}
-
-/* Sistem açıkken perdenin durumu */
-body.system-on .overlay {
-    opacity: 0.3; 
-}
-
-/* 2. Düğme Konteynırı */
-.power-switch-container {
-    position: fixed;
-    top: 30px;
-    right: 50px;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.switch-text {
-    font-size: 15px;
-    font-weight: bold;
-    color: #00d4ff;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 120px;
-    height: 60px;
-}
-
-.switch input { opacity: 0; width: 0; height: 0; }
-
-/* 3. FOTOĞRAFLI SLIDER (Yollar ../../ ile düzeltildi) */
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    transition: 0.4s ease-in-out;
-    /* İki klasör dışarı çıkıp photos'a girer */
-    background-image: url('../../photos/plugin.png'); 
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-/* Tıklandığında resim değişimi */
-input:checked + .slider {
-    background-image: url('../../photos/plugout.png');
-    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
-}
 /* 3'lü Fotoğraf Satırı */
 .project-triple-row {
     display: flex;
-    justify-content: center; /* Merkeze hizalar */
-    gap: 15px;              /* Resimler arası boşluk */
-    margin: 30px auto;      /* Üst-alt boşluk ve ortalama */
-    width: 100%;            /* Alanın tamamını kullanır */
-    max-width: 900px;       /* Metin kutunla aynı genişlikte tutar */
+    justify-content: center;
+    gap: 15px;
+    margin: 30px auto;
+    max-width: 900px;
 }
 
-/* Her bir resim kutusu */
-.triple-item {
-    flex: 1;                /* Üçüne de eşit genişlik paylaştırır */
-    display: flex;
-}
-
+.triple-item { flex: 1; display: flex; }
 .triple-item img {
-    width: 100%;
-    height: 200px;          /* Yüksekliği sabitliyoruz ki hepsi aynı boyda olsun */
-    object-fit: cover;      /* Fotoğraflar farklı oranlardaysa bozulmayı önler */
+    width: 100%; height: 200px;
+    object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
 }
 
+/* --- CONNECT (FOOTER) --- */
+#connect {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    border-top: 2px solid #00d4ff;
+    min-height: 250px; 
+    padding: 40px 0 30px 0; 
+    box-shadow: 0 -15px 40px rgba(0, 212, 255, 0.15);
+}
 
-/* Mobilde alt alta gelmeleri için (Responsive) */
+#connect h2 { color: #fff; font-size: 1.6rem; margin-bottom: 25px; letter-spacing: 5px; text-transform: uppercase; }
+
+.contact-links {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.contact-links a {
+    text-decoration: none; color: #00d4ff; font-size: 0.95rem;
+    padding: 10px 22px; border: 1px solid #00d4ff; transition: 0.4s;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.contact-links a:hover { background: #00d4ff; color: #000; box-shadow: 0 0 15px #00d4ff; }
+
+.copyright-text {
+    color: rgba(255, 255, 255, 0.7); 
+    font-size: 11px;
+    letter-spacing: 3px;
+    border-top: 1px solid rgba(0, 212, 255, 0.1); 
+    width: 80%; 
+    text-align: center; 
+    padding-top: 20px;
+    text-transform: uppercase;
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-    
-    /* 1. Navbar ve Başlık Alanı Düzenleme */
-    .navbar {
-        height: auto;
-        padding: 60px 20px 20px 20px; /* Power switch için yer açtık */
-        position: relative;
-    }
-
-    .header-container {
-        flex-direction: column;
-        width: 100%;
-        gap: 15px;
-        text-align: center;
-    }
-
-    /* Main Page (Back Button) tek satıra sığsın */
-    .back-button {
-        width: 80%;
-        max-width: 200px;
-        font-size: 0.9rem;
-        padding: 8px 12px;
-        white-space: nowrap; /* Metnin kırılmasını önler */
-        margin-top: 20px;
-    }
-
-    .header-info h1 {
-        font-size: 1.5rem; /* Başlığı küçülttük */
-        line-height: 1.2;
-        margin: 0;
-    }
-
-    .header-subtitle {
-        font-size: 0.9rem;
-    }
-
-    /* 2. Power Switch (Slider) Küçültme ve Ortalama */
-    .power-switch-container {
-        position: absolute;
-        top: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-        flex-direction: row; /* YAZIYI YANINA ALIR */
-        align-items: center;
-        gap: 8px;
-        width: fit-content;
-    }
-
-    .switch-text {
-        font-size: 10px;
-        margin: 0;
-        white-space: nowrap;
-    }
-
-    .switch {
-        width: 80px;
-        height: 40px;
-    }
-
-    /* 3. İçerik ve Yazı Alanı */
-    .project-details {
-        padding: 20px;
-        width: 95%;
-        box-sizing: border-box;
-    }
-
-    /* Intern 1'e özel 3'lü fotoğraf satırı düzenlemesi */
-    .project-triple-row {
-        flex-direction: column !important; /* Yan yana durmaya çalışma, alt alta geç */
-        gap: 20px;
-        width: 100%;
-        align-items: center;
-    }
-
-    .triple-item {
-        width: 100%;
-    }
-
-    .triple-item img {
-        height: 250px; /* İnce kalmaması için yükseklik */
-        width: 100% !important;
-        object-fit: cover;
-    }
-
-    /* Sayfadaki diğer tüm genel fotoğraflar */
-    .project-images img {
-        width: 100%;
-        height: auto;
-    }
-}
-
-/* Tablet ayarı (Orijinal yapındaki gibi bıraktım) */
-@media (min-width: 769px) and (max-width: 1100px) {
-    .project-triple-row {
-        width: 95%;
-        gap: 20px;
-    }
-    .header-container {
-        width: 95%;
-    }
+    .navbar { height: auto; padding: 60px 20px 20px; position: relative; }
+    .header-info { display: none; }
+    .nav-left { flex-direction: column; width: 100%; gap: 10px; }
+    .power-switch-container { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); flex-direction: row; }
+    .project-triple-row { flex-direction: column; align-items: center; }
+    .triple-item img { height: 250px; }
 }

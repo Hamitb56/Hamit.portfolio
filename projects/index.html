@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamit Budak | Projects</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="../photos/icon.png">
+</head>
+<body>
+    <div class="overlay"></div>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="javascript:void(0);" onclick="goBackHome()" class="back-btn">
+                <span class="arrow">←</span> BACK
+            </a>
+        </div>
+
+        <div class="page-title">PROJECTS</div>
+        
+        <div class="nav-links">
+            <div class="power-switch-container">
+                <label class="switch">
+                    <input type="checkbox" id="power-toggle"> 
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-text" id="switch-status">PLUG IN</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="projects-container">
+
+        
+
+        <a href="../projects/thesis/index.html" class="project-card">
+
+            <img src="../photos/Tez.webp" alt="Final Thesis">
+
+            <div class="project-overlay">
+
+                <h3>FINAL THESIS</h3>
+
+                <p>Autonomous Indoor Navigating Robot</p>
+
+            </div>
+
+        </a>
+
+
+
+        <a href="../projects/rover/index.html" class="project-card">
+
+            <img src="../photos/rover.webp" alt="Earendil Rover">
+
+            <div class="project-overlay">
+
+                <h3>EARENDIL ROVER</h3>
+
+                <p>Autonomous Mobile Robots</p>
+
+            </div>
+
+        </a>
+
+
+
+        <a href="../projects/internship1/index.html" class="project-card">
+
+            <img src="../photos/intern1.webp" alt="Internship 1">
+
+            <div class="project-overlay">
+
+                <h3>INTERNSHIP 1</h3>
+
+                <p>Cloud and Digitalization</p>
+
+            </div>
+
+        </a>
+
+
+
+        <a href="../projects/internship2/index.html" class="project-card">
+
+            <img src="../photos/intern2.webp" alt="Internship 2">
+
+            <div class="project-overlay">
+
+                <h3>INTERNSHIP 2</h3>
+
+                <p>Planning and Drawing Projects</p>
+
+            </div>
+
+        </a>
+
+
+
+        <a href="../projects/hospital/index.html" class="project-card">
+
+            <img src="../photos/kocaeli.webp" alt="Kocaeli City Hospital">
+
+            <div class="project-overlay">
+
+                <h3>KOCAELI CITY HOSPITAL</h3>
+
+                <p>Project Following and Leading</p>
+
+            </div>
+
+        </a>
+
+        
+
+        <a href="../projects/boards/index.html" class="project-card">
+
+            <img src="../photos/board.webp" alt="boards">
+
+            <div class="project-overlay">
+
+                <h3>BOARDS DESIGN</h3>
+
+                <p>University Projects</p>
+
+            </div>
+
+        </a>
+
+
+
+        <a href="../projects/light/index.html" class="project-card">
+
+            <img src="../photos/light.webp" alt="Light">
+
+            <div class="project-overlay">
+
+                <h3>LIGHT TRACKING MOTOR</h3>
+
+                <p>Motor Following To Light</p>
+
+            </div>
+
+        </a>
+
+
+
+        <a href="../projects/image/index.html" class="project-card">
+
+            <img src="../photos/car.webp" alt="CAR">
+
+            <div class="project-overlay">
+
+                <h3>VEHICLE COUNTER</h3>
+
+                <p>MATLAB Vehicle Counter by Image Proccessing</p>
+
+            </div>
+
+        </a>
+
+
+
+        <a href="../projects/burglary/index.html" class="project-card">
+
+            <img src="../photos/burglary.webp" alt="Burglary Controller">
+
+            <div class="project-overlay">
+
+                <h3>BURGLARY CONTROLLER</h3>
+
+                <p>Lead and Lag Compansator to Burglar</p>
+
+            </div>
+
+        </a>
+
+
+
+        <a href="../projects/protocol/index.html" class="project-card">
+
+            <img src="../photos/redap.webp" alt="Personal Protocol">
+
+            <div class="project-overlay">
+
+                <h3>PERSONAL PROTOCOL</h3>
+
+                <p>Reliable Data Protocol</p>
+
+            </div>
+
+        </a>
+
+        
+
+    </main>
+
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
+        </div>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
+    <script>
+        const toggle = document.getElementById('power-toggle');
+        const statusText = document.getElementById('switch-status');
+        const body = document.body;
+
+        const systemState = localStorage.getItem('portfolio-power');
+        function goBackHome() {
+            // Ana sayfaya bir işaret bırakıyoruz
+            sessionStorage.setItem('returnFromProjects', 'true');
+            
+            if (document.referrer.includes(window.location.hostname)) {
+                window.history.back();
+            } else {
+                window.location.href = "../index.html";
+            }
+        }
+
+        if (systemState === 'on') {
+            toggle.checked = true;
+            body.classList.add('system-on');
+            statusText.innerText = "PLUG OUT";
+        }
+
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                body.classList.add('system-on');
+                statusText.innerText = "PLUG OUT";
+                localStorage.setItem('portfolio-power', 'on');
+            } else {
+                body.classList.remove('system-on');
+                statusText.innerText = "PLUG IN";
+                localStorage.setItem('portfolio-power', 'off');
+            }
+        });
+    </script>
+</body>
+</html>

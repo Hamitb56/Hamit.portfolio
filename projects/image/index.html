@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">VEHICLE DETECTION & COUNTING</h1>
-                <p class="header-subtitle">MATLAB Image Processing App</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">VEHICLE DETECTION</h1>
+            <p class="header-subtitle">MATLAB Image Processing App</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -35,9 +40,7 @@
                 This project focuses on the development of an automated system designed to detect and count 
                 moving vehicles from a video stream in real-time. Developed using the MATLAB environment, the 
                 system transforms raw video frames into actionable traffic data through a series of digital 
-                image processing stages. The project demonstrates the practical application of computer vision 
-                in solving real-world engineering challenges, such as urban traffic monitoring and infrastructure 
-                planning.
+                image processing stages.
             </p>
             
             <h3>Technical Implementation & Methodology</h3>
@@ -46,19 +49,10 @@
                 their morphological characteristics through the following pipeline:
             </p>
             <ul>
-                <li><strong>Binarization & Grayscale Conversion:</strong> Initial color frames are 
-                converted to grayscale and subsequently transformed into binary (black and white) 
-                images. This reduction to 0s and 1s simplifies the data, allowing for high-speed 
-                processing of pixel groups.</li>
-                <li><strong>Background Subtraction:</strong> By calculating the difference between consecutive 
-                frames, static elements are removed. This ensures the system focuses exclusively on dynamic pixels 
-                representing movement.</li>
-                <li><strong>Blob Analysis & Filtering:</strong> The system analyzes clusters of white pixels, known 
-                as "blobs." These groups are evaluated based on predefined area and dimension criteria; if a blob 
-                matches the typical size of a vehicle, it is classified as a valid target.</li>
-                <li><strong>Virtual Trigger & Counting:</strong> A virtual detection line is established within 
-                the coordinate plane. When a tracked "blob" crosses this threshold, the counter is triggered, updating 
-                the total vehicle count instantly.</li>
+                <li><strong>Binarization & Grayscale Conversion:</strong> Initial color frames are converted to grayscale and binary images to simplify data processing.</li>
+                <li><strong>Background Subtraction:</strong> Static elements are removed by calculating differences between consecutive frames, focusing on dynamic movement.</li>
+                <li><strong>Blob Analysis & Filtering:</strong> Pixel clusters ("blobs") are evaluated based on area and dimension criteria to classify them as vehicles.</li>
+                <li><strong>Virtual Trigger & Counting:</strong> A virtual detection line triggers the counter instantly when a tracked "blob" crosses the established threshold.</li>
             </ul>
 
             <div class="matlab-project-row">
@@ -70,34 +64,29 @@
                 </div>
             </div>
 
-            <h3>Engineering Competencies & Achievements</h3>
+            <h3>Engineering Competencies</h3>
             <ul>
-                <li><strong>Computer Vision Toolbox:</strong> Gained extensive experience in utilizing MATLAB's 
-                specialized libraries for filtering, morphological operations, and object tracking.</li>
-                <li><strong>Signal Processing:</strong> Mastered digital image processing techniques, including 
-                noise reduction and threshold optimization, to maintain accuracy under varying environmental 
-                conditions.</li>
-                <li><strong>Software Integration:</strong> Developed a modular software architecture that can be 
-                adapted for different camera angles and traffic densities, providing a scalable solution for 
-                traffic engineering.</li>
-                
+                <li><strong>Computer Vision Toolbox:</strong> Extensive utilization of specialized MATLAB libraries for object tracking.</li>
+                <li><strong>Signal Processing:</strong> Mastered techniques including noise reduction and threshold optimization.</li>
+                <li><strong>Software Integration:</strong> Developed a modular architecture adaptable for different camera angles.</li>
             </ul>
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - MATLAB & Computer Vision</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -106,16 +95,15 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on');
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off');
             }
         });
     </script>

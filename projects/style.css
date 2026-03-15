@@ -1,0 +1,242 @@
+/* --- TEMEL AYARLAR --- */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-image: url('../photos/projects_background.png'); 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #000;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- OVERLAY (Siyah Perde) --- */
+.overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: black;
+    opacity: 0.95; 
+    z-index: 5; 
+    transition: opacity 1.5s ease-in-out;
+    pointer-events: none;
+}
+body.system-on .overlay { opacity: 0.4; }
+
+/* --- NAVBAR (80px Yükseklik) --- */
+.navbar {
+    width: 100%; height: 80px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0 50px; 
+    background: rgba(0,0,0,0.95);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    position: fixed; top: 0; left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.page-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 26px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.nav-left { display: flex; align-items: center; }
+
+.back-btn {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    transition: 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    color: #00d4ff;
+    border-color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+/* --- POWER SWITCH --- */
+.power-switch-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.switch-text {
+    font-size: 11px;
+    font-weight: bold;
+    color: #00d4ff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 35px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    transition: 0.4s ease-in-out;
+    background-image: url('../../photos/plugin.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+input:checked + .slider {
+    background-image: url('../../photos/plugout.png');
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+}
+
+/* --- PROJELER GRID (Şeffaf Alanlar Temizlendi) --- */
+.projects-container {
+    position: relative;
+    z-index: 10;
+    margin-top: 100px; /* Navbar'dan sonraki boşluk */
+    padding: 20px 50px 80px 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Arkadaki şeffaf gri puslu alanı kaldırdık */
+    background: transparent;
+    backdrop-filter: none;
+}
+
+.project-card {
+    height: 280px; 
+    border-radius: 15px;
+    position: relative; 
+    overflow: hidden;
+    background: #000; /* Kutu arka planı tam siyah */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+    text-decoration: none;
+}
+
+.project-card:hover { 
+    transform: translateY(-10px); 
+    border-color: #00d4ff; 
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2); 
+}
+
+.project-card img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Resmi kutuya tam yayar, boşluk bırakmaz */
+    display: block;
+    opacity: 0.8; 
+    transition: 0.4s; 
+}
+
+.project-card:hover img { opacity: 0.2; }
+
+/* KART ÜZERİNDEKİ BUZLU CAM */
+.project-overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 20px; 
+    opacity: 0; 
+    transition: 0.4s;
+    background: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    text-align: center;
+}
+
+.project-card:hover .project-overlay { opacity: 1; }
+.project-overlay h3 { color: #00d4ff; margin: 0 0 10px 0; font-size: 1.4rem; }
+.project-overlay p { color: #fff; margin: 0; font-size: 0.9rem; }
+
+/* --- FOOTER / CONNECT --- */
+#connect {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    border-top: 2px solid #00d4ff;
+    min-height: 250px; 
+    padding: 40px 0 30px 0; 
+    box-shadow: 0 -15px 40px rgba(0, 212, 255, 0.15);
+}
+
+#connect h2 { color: #fff; font-size: 1.6rem; margin-bottom: 25px; letter-spacing: 5px; text-transform: uppercase; }
+
+.contact-links {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.contact-links a {
+    text-decoration: none; color: #00d4ff; font-size: 0.95rem;
+    padding: 10px 22px; border: 1px solid #00d4ff; transition: 0.4s;
+    text-transform: uppercase;
+}
+.contact-links a:hover { background: #00d4ff; color: #000; box-shadow: 0 0 15px #00d4ff; }
+
+.copyright-text {
+    color: rgba(255, 255, 255, 0.7); 
+    font-size: 11px;
+    letter-spacing: 3px;
+    border-top: 1px solid rgba(0, 212, 255, 0.1); 
+    width: 80%; 
+    text-align: center; 
+    padding-top: 20px;
+    text-transform: uppercase;
+}
+
+/* Mobilde Hizalama */
+@media (max-width: 768px) {
+    .navbar { padding: 0 20px; }
+    .page-title { font-size: 18px; letter-spacing: 2px; }
+    .projects-container { padding: 20px; }
+}

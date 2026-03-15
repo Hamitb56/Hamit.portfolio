@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">KOCAELI CITY HOSPITAL</h1>
-                <p class="header-subtitle">Project Following and Leading</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">KOCAELI CITY HOSPITAL</h1>
+            <p class="header-subtitle">Project Following and Leading</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -47,7 +52,6 @@
                 </div>
             </div>
 
-
             <h3>Technical Leadership & Operational Management</h3>
             <ul>
                 <li><strong>Workforce Supervision:</strong> I directly managed and coordinated a technical team of 
@@ -56,52 +60,51 @@
                 timeline.</li>
                 <li><strong>Operating Room (OR) Automation:</strong> I took a lead role in the installation and 
                 routing of automation systems for operating theaters. This included the calibration and control 
-                of differential air pressure systems and climate control units, which are critical for maintaining 
-                sterile environments and patient safety.</li>
+                of differential air pressure systems and climate control units.</li>
                 <li><strong>Intensive Care Unit (ICU) Integration:</strong> I oversaw the technical wiring and 
                 device connectivity within ICUs and neonatal units, managing the integration between bedside 
                 medical sensors and the central hospital monitoring network.</li>
                 <li><strong>Infrastructure & Panel Engineering:</strong> My early phase involved the systematic 
-                placement of automation control panels and the implementation of complex cable routing strategies 
-                (above-ceiling systems) across multiple floors, ensuring organized and serviceable infrastructure.</li>
+                placement of automation control panels and the implementation of complex cable routing strategies.</li>
             </ul>
+
             <h3>Mini Part of Hospital Automation Project:</h3>
             <div class="project-images">
                 <img src="../../photos/hospital_autocad.webp" alt="Kocaeli City Hospital Project">
             </div>
-            
 
             <h3>Project Coordination & Corporate Representation</h3>
             <p>
                 As a key member of the technical team, I represented my firm in high-level project tracking and 
                 coordination meetings. Being the primary person responsible for the automation progress on my 
                 assigned floors, I provided status reports, addressed technical bottlenecks, and collaborated with 
-                other engineering disciplines (mechanical, civil, and electrical) to ensure seamless system integration.
+                other engineering disciplines.
             </p>
 
             <h3>Professional Impact</h3>
             <p>
                 This role significantly enhanced my leadership capabilities and technical expertise in Building 
                 Management Systems (BMS) and healthcare-specific automation. Managing a large team in a high-stakes 
-                environment like a city hospital sharpened my problem-solving skills, technical reporting accuracy, 
-                and my ability to deliver complex engineering solutions under intense operational pressure.
+                environment like a city hospital sharpened my problem-solving skills and technical reporting accuracy.
             </p>
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - Project Leading Experience</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
 
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
+        // Hafıza Kontrolü
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -110,16 +113,16 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
+        // Switch İşlevi
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on');
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off');
             }
         });
     </script>

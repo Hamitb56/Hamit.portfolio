@@ -12,12 +12,17 @@
     <div class="overlay"></div>
     
     <nav class="navbar">
-        <div class="header-container">
-            <a href="../../index.html" class="back-button">← MAIN PAGE</a>
-            <div class="header-info">
-                <h1 class="header-name">EARENDIL ROVER</h1>
-                <p class="header-subtitle">Autonomous Mobile Robots</p>
-            </div>
+        <div class="nav-left">
+            <a href="javascript:history.back()" class="nav-btn">← BACK</a>
+            <a href="../../index.html" class="nav-btn">HOME</a>
+        </div>
+
+        <div class="header-info">
+            <h1 class="header-name">EARENDIL ROVER</h1>
+            <p class="header-subtitle">Autonomous Mobile Robots</p>
+        </div>
+        
+        <div class="nav-right">
             <div class="power-switch-container">
                 <label class="switch">
                     <input type="checkbox" id="power-toggle"> 
@@ -38,29 +43,11 @@
                 30 members and leading the transition from manual control systems to sophisticated autonomous 
                 navigation.
             </p>
+
             <h2>Rover Team 2025</h2>
-            <h3>Leadership & Strategic Management (Season 2 - Team Captain)</h3>
-            <p>
-                In my second year, I took over the leadership of a 30-person multidisciplinary team, managing 
-                everything from high-level coordination to technical execution:
-            </p>
-            <ul>
-                <li><strong>Championship Success:</strong> Under my leadership, the team achieved 1st Place 
-                in all three categories at the ARC Junior '25 competition, dominating the field through superior 
-                technical preparation.</li>
-                <li><strong>Autonomous Evolution:</strong> I spearheaded the project’s most significant upgrade 
-                transforming the rover from a remote-controlled platform into a fully autonomous system to meet 
-                the advanced requirements of the ARC Jr. '25 specifications.</li>
-                <li><strong>Multi-Disciplinary Oversight:</strong> I was active in every phase of the project, 
-                including software development, hardware integration, and sponsor relations, while also providing 
-                technical training to new members.</li>
-                <li><strong>National Competition:</strong> Led the team to the semi-finals of the TEKNOFEST 
-                Agricultural Technologies competition with "Project OKTA," focusing on automation and robotics 
-                in smart farming.</li>
-            </ul>
+            
             <div class="project-header-row">
-                
-                <h3> You can pet the rover!</h3>
+                <h3>You can pet the rover!</h3>
             </div>
 
             <div class="split-project-row">
@@ -81,9 +68,49 @@
                 </div>
             </div>
 
+            <h3>Leadership & Strategic Management (Season 2 - Team Captain)</h3>
+            <p>
+                In my second year, I took over the leadership of a 30-person multidisciplinary team, managing 
+                everything from high-level coordination to technical execution:
+            </p>
+            <ul>
+                <li><strong>Championship Success:</strong> Under my leadership, the team achieved 1st Place 
+                in all three categories at the ARC Junior '25 competition.</li>
+                <li><strong>Autonomous Evolution:</strong> I spearheaded the project’s most significant upgrade 
+                transforming the rover from a remote-controlled platform into a fully autonomous system.</li>
+                <li><strong>Multi-Disciplinary Oversight:</strong> I was active in every phase of the project, 
+                including software development, hardware integration, and technical training.</li>
+                <li><strong>National Competition:</strong> Led the team to the semi-finals of the TEKNOFEST 
+                Agricultural Technologies competition with "Project OKTA."</li>
+            </ul>
+
             <div class="full-width-award">
                 <img src="../../photos/rover_award.jpeg" alt="Rover Project Award">
             </div>
+
+            <h2>Rover Team 2024</h2>
+            <div class="rover-gallery-row">
+                <div class="rover-team">
+                    <img src="../../photos/rover_2024_team.jpg" alt="Rover 2024 Team">
+                </div>
+                <div class="rover-vehicle">
+                    <img src="../../photos/rover_2024_vehicle.jpg" alt="Rover 2024 Vehicle">
+                </div>
+            </div>
+
+            <h3>Design & Manufacturing (Season 1 - Founding Designer)</h3>
+            <p>
+                As the team's primary designer in its inaugural year, I was responsible for bringing the first 
+                prototype to life:
+            </p>
+            <ul>
+                <li><strong>Full-Scale CAD Design:</strong> Performed the complete 3D modeling of the rover using 
+                SolidWorks, ensuring structural integrity.</li>
+                <li><strong>Manufacturing & Assembly:</strong> Took an active role in the 3D printing, fabrication, 
+                and assembly of the entire vehicle.</li>
+                <li><strong>Initial Success:</strong> My technical designs contributed to our team winning 3rd 
+                Place in a category at ARC Junior '24.</li>
+            </ul>
 
             <script type="importmap">
             {
@@ -100,11 +127,8 @@
                 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
                 const container = document.getElementById('model-container');
-                
                 const scene = new THREE.Scene();
                 const camera = new THREE.PerspectiveCamera(75, container.clientWidth / 500, 0.1, 1000);
-                
-                // YAKINLIK AYARI: 5'ten 3'e düşürerek modeli yakınlaştırdık
                 camera.position.set(-0.5, 0.5, 1); 
 
                 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -134,11 +158,9 @@
                             });
                         }
                     });
-
                     const box = new THREE.Box3().setFromObject(object);
                     const center = box.getCenter(new THREE.Vector3());
                     object.position.sub(center);
-                    
                     scene.add(object);
                 });
 
@@ -149,7 +171,6 @@
                 }
                 animate();
 
-                // --- VİDEO KONTROLÜ BURADA ---
                 const playBtn = document.getElementById('play-button');
                 if(playBtn) {
                     playBtn.addEventListener('click', function() {
@@ -158,7 +179,6 @@
                         document.getElementById('rover-video').play();
                     });
                 }
-                // -----------------------------
 
                 window.addEventListener('resize', () => {
                     const width = container.clientWidth;
@@ -167,51 +187,22 @@
                     renderer.setSize(width, 500);
                 });
             </script>
-            
-            <h2>Rover Team 2024</h2>
-            <h3>Design & Manufacturing (Season 1 - Founding Designer)</h3>
-            <p>
-                As the team's primary designer in its inaugural year, I was responsible for bringing the first 
-                prototype to life:
-            </p>
-            <ul>
-                <li><strong>Full-Scale CAD Design:</strong> Performed the complete 3D modeling of the rover using 
-                SolidWorks, ensuring structural integrity and component compatibility.</li>
-                <li><strong>Manufacturing & Assembly:</strong> Took an active role in the 3D printing, fabrication, 
-                and assembly of the entire vehicle, translating digital designs into a physical racing 
-                prototype.</li>
-                <li><strong>Initial Success:</strong> My technical designs contributed to our team winning 3rd 
-                Place in a category at ARC Junior '24, establishing our reputation as a top-tier competitor.</li>
-            </ul>
-
-            
-            <div class="rover-gallery-row">
-                <div class="rover-team">
-                    <img src="../../photos/rover_2024_team.jpg" alt="Rover 2024 Team">
-                </div>
-
-                <div class="rover-vehicle">
-                    <img src="../../photos/rover_2024_vehicle.jpg" alt="Rover 2024 Vehicle">
-                </div>
-            </div>
-
-            
         </article>
     </main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Hamit Budak - Earendil Rover Project</p>
-            <div class="social-links">
-                <a href="../../index.html">Main Page</a>
-            </div>
+    <section id="connect">
+        <h2>CONNECT</h2>
+        <div class="contact-links">
+            <a href="mailto:hamitb56@gmail.com">E MAIL</a>
+            <a href="https://www.linkedin.com/in/hamitbudak/" target="_blank">LINKEDIN</a>
+            <a href="https://github.com/hamitb56" target="_blank">GITHUB</a>
         </div>
-    </footer>
+        <p class="copyright-text">© 2026 HAMIT BUDAK - ALL RIGHTS RESERVED</p>
+    </section>
+
     <script>
         const toggle = document.getElementById('power-toggle');
         const statusText = document.getElementById('switch-status');
-
-        // 1. HAFIZAYI KONTROL ET: Sayfa açıldığında daha önce basılmış mı bak
         const systemState = localStorage.getItem('portfolio-power');
 
         if (systemState === 'on') {
@@ -220,16 +211,15 @@
             statusText.innerText = "PLUG OUT";
         }
 
-        // 2. DÜĞMEYE BASILDIĞINDA: Hem sınıfı ekle hem hafızaya yaz
         toggle.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('system-on');
                 statusText.innerText = "PLUG OUT";
-                localStorage.setItem('portfolio-power', 'on'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'on');
             } else {
                 document.body.classList.remove('system-on');
                 statusText.innerText = "PLUG IN";
-                localStorage.setItem('portfolio-power', 'off'); // Hafızaya al
+                localStorage.setItem('portfolio-power', 'off');
             }
         });
     </script>
